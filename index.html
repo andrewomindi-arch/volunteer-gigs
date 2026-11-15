@@ -1,296 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Find meaningful volunteering opportunities in Kenya. Join Volunteer Gigs and give your spare time to children's homes, hospices and animal shelters.">
-  <meta name="theme-color" content="#16212F">
-  <title>Volunteer Gigs | Your Spare Time Can Change Someone's Life</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --navy: #16212F;
-      --slate: #718696;
-      --orange: #EBA34A;
-      --white: #FFFFFF;
-      --light: #F5F7F9;
-      --ink: #263442;
-      --muted: #687784;
-      --radius: 18px;
-      --shadow: 0 16px 45px rgba(22,33,47,.10);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
-    body { margin: 0; font-family: Inter, Arial, sans-serif; color: var(--ink); line-height: 1.65; }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    .container { width: min(1120px, calc(100% - 40px)); margin: auto; }
-    .topbar { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.96); backdrop-filter: blur(12px); box-shadow: 0 2px 15px rgba(0,0,0,.06); }
-    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: flex; align-items: center; gap: 10px; color: var(--navy); font-weight: 800; font-size: 1.25rem; letter-spacing: -.5px; }
-    .brand-mark { width: 38px; height: 38px; border-radius: 12px; background: var(--orange); color: var(--navy); display: grid; place-items: center; font-weight: 900; }
-    .nav-links { display: flex; align-items: center; gap: 27px; font-size: .91rem; font-weight: 600; color: #455463; }
-    .nav-links a:hover { color: #C47B21; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 21px; border-radius: 999px; font-weight: 700; transition: .2s ease; border: 2px solid transparent; cursor: pointer; }
-    .btn-primary { background: var(--orange); color: var(--navy); }
-    .btn-primary:hover { background: #f3b765; transform: translateY(-2px); }
-    .btn-outline { border-color: rgba(255,255,255,.75); color: white; }
-    .btn-outline:hover { background: white; color: var(--navy); }
-    .menu-toggle { display: none; border: 0; background: none; font-size: 1.8rem; color: var(--navy); cursor: pointer; }
-    .hero { color: white; background: linear-gradient(90deg, rgba(14,26,39,.91), rgba(14,26,39,.55)), url("YOUR_HERO_IMAGE_URL") center/cover no-repeat; min-height: 650px; display: flex; align-items: center; }
-    .hero-content { max-width: 720px; padding: 90px 0; }
-    .eyebrow { display: inline-block; color: var(--orange); text-transform: uppercase; letter-spacing: 2px; font-size: .76rem; font-weight: 800; margin-bottom: 15px; }
-    h1 { font-size: clamp(2.7rem, 6vw, 4.8rem); line-height: 1.08; letter-spacing: -2.5px; margin: 0 0 22px; }
-    .hero p { max-width: 620px; font-size: 1.13rem; color: rgba(255,255,255,.88); margin: 0 0 30px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; }
-    section { padding: 88px 0; }
-    .section-heading { max-width: 700px; margin: 0 auto 46px; text-align: center; }
-    .section-heading .eyebrow { color: #C47B21; }
-    h2 { color: var(--navy); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; letter-spacing: -1.2px; margin: 0 0 15px; }
-    .section-heading p { color: var(--muted); margin: 0; }
-    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 55px; }
-    .intro-image { min-height: 420px; border-radius: 26px; overflow: hidden; box-shadow: var(--shadow); background: #dce3e8; }
-    .intro-image img { width: 100%; height: 100%; min-height: 420px; object-fit: cover; }
-    .intro-copy h2 { margin-bottom: 20px; }
-    .intro-copy p { color: var(--muted); }
-    .check-list { padding: 0; list-style: none; margin: 24px 0; }
-    .check-list li { margin: 12px 0; font-weight: 600; }
-    .check-list li:before { content: "✓"; color: #C47B21; font-weight: 900; margin-right: 10px; }
-    .soft { background: var(--light); }
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .card { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: 0 8px 28px rgba(22,33,47,.07); }
-    .card-image { height: 220px; background: #dce3e8; overflow: hidden; }
-    .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
-    .card:hover .card-image img { transform: scale(1.04); }
-    .card-body { padding: 25px; }
-    .card h3 { color: var(--navy); margin: 0 0 10px; font-size: 1.25rem; }
-    .card p { color: var(--muted); margin: 0; }
-    .how-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
-    .step { padding: 25px 20px; border: 1px solid #e4e9ed; border-radius: var(--radius); }
-    .step-number { width: 43px; height: 43px; border-radius: 50%; display: grid; place-items: center; background: #fff0dc; color: #9b5d12; font-weight: 800; margin-bottom: 17px; }
-    .step h3 { color: var(--navy); margin: 0 0 8px; }
-    .step p { color: var(--muted); font-size: .94rem; margin: 0; }
-    .gallery { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 18px; }
-    .gallery img { width: 100%; height: 290px; object-fit: cover; border-radius: 16px; background: #dce3e8; }
-    .impact-note { text-align: center; max-width: 760px; margin: 35px auto 0; color: var(--muted); }
-    .support-box { background: var(--navy); color: white; border-radius: 26px; padding: 52px; display: grid; grid-template-columns: 1.4fr 1fr; align-items: center; gap: 30px; }
-    .support-box h2 { color: white; }
-    .support-box p { color: rgba(255,255,255,.78); margin-bottom: 0; }
-    .support-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-    .contact-grid p { color: var(--muted); }
-    .contact-links { display: grid; gap: 13px; margin-top: 24px; }
-    .contact-link { padding: 15px 18px; border-radius: 13px; background: var(--light); font-weight: 700; color: var(--navy); }
-    .contact-link span { color: #9b641f; margin-right: 10px; }
-    .note { background: #fff7eb; border-left: 4px solid var(--orange); padding: 18px 20px; border-radius: 10px; color: #67533a; font-size: .91rem; }
-    footer { background: #101a26; color: rgba(255,255,255,.72); padding: 35px 0; font-size: .9rem; }
-    .footer-row { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-    footer strong { color: white; }
-    @media (max-width: 850px) {
-      .nav-links { display: none; position: absolute; top: 76px; left: 0; right: 0; background: white; padding: 22px 25px 28px; flex-direction: column; align-items: stretch; gap: 18px; box-shadow: 0 12px 18px rgba(0,0,0,.08); }
-      .nav-links.open { display: flex; }
-      .menu-toggle { display: block; }
-      .nav-cta { display: none; }
-      .intro-grid, .contact-grid, .support-box { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: 1fr 1fr; }
-      .how-grid { grid-template-columns: 1fr 1fr; }
-      .gallery { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 560px) {
-      .container { width: min(100% - 30px, 1120px); }
-      section { padding: 65px 0; }
-      .hero { min-height: 600px; }
-      h1 { letter-spacing: -1.5px; }
-      .cards, .how-grid, .gallery { grid-template-columns: 1fr; }
-      .gallery img { height: 250px; }
-      .support-box { padding: 32px 24px; }
-      .intro-image, .intro-image img { min-height: 300px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Find meaningful volunteering opportunities in Kenya. Join Volunteer Gigs and give your spare time to children’s homes, hospices and animal shelters.">
+<meta name="theme-color" content="#16212F">
+<title>Volunteer Gigs | Your Spare Time Can Change Someone’s Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#16212F;--slate:#718696;--orange:#EBA34A;--orange-d:#B8741F;--light:#F5F7F9;--muted:#64727E;--soft:#FDF0DE;--line:#E9EDF0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--navy);line-height:1.65}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+
+/* Shared building blocks */
+.vg-wrap{max-width:1150px;margin:auto}
+.vg-sec{padding:100px 25px}
+.vg-light{background:var(--light)}
+.vg-dark{background:var(--navy);color:#fff}
+.vg-label{font-size:12px;font-weight:800;letter-spacing:2.5px;color:var(--orange-d)}
+.vg-dark .vg-label{color:var(--orange)}
+.vg-h2{font-size:clamp(34px,4.5vw,50px);line-height:1.2;font-weight:800;letter-spacing:-1px;margin:20px 0;color:var(--navy)}
+.vg-h2 span{display:block;color:var(--slate)}
+.vg-dark .vg-h2{color:#fff}
+.vg-dark .vg-h2 span{color:var(--orange)}
+.vg-head{max-width:720px;margin:0 auto 60px;text-align:center}
+.vg-head p{max-width:660px;margin:auto;color:var(--muted);font-size:16px;line-height:1.9}
+.vg-dark .vg-head p{color:#C9D3DB}
+.vg-line{width:65px;height:4px;background:var(--orange);border-radius:5px;margin:26px 0}
+.vg-grid{display:grid;gap:22px}
+.vg-g3{grid-template-columns:repeat(3,1fr)}
+.vg-g4{grid-template-columns:repeat(4,1fr);gap:20px}
+.vg-split{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.vg-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:16px 24px;border-radius:6px;font-size:14px;font-weight:800;border:1px solid transparent;transition:.3s ease}
+.vg-btn:hover{transform:translateY(-3px)}
+.vg-btn span{font-size:20px;line-height:1}
+.vg-primary{background:var(--orange);color:var(--navy)}
+.vg-primary:hover{background:#F3B765}
+.vg-ghost{border-color:rgba(255,255,255,.8);color:#fff}
+.vg-ghost:hover{background:#fff;color:var(--navy)}
+.vg-ghost-dark{border-color:var(--slate);color:var(--navy)}
+.vg-ghost-dark:hover{background:var(--slate);color:#fff}
+.vg-card{position:relative;background:#fff;color:var(--navy);border-radius:10px;padding:32px 28px;transition:transform .3s ease,box-shadow .3s ease}
+.vg-light .vg-card{border:1px solid var(--line)}
+.vg-card:hover{transform:translateY(-6px);box-shadow:0 14px 32px rgba(22,33,47,.12)}
+.vg-card h3{font-size:21px;line-height:1.35;font-weight:800;margin:0 0 13px}
+.vg-card p{color:var(--muted);font-size:15px;line-height:1.8;margin:0}
+.vg-icon{width:54px;height:54px;border-radius:50%;background:var(--soft);color:var(--orange-d);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:24px}
+.vg-num{position:absolute;top:26px;right:26px;font-size:32px;font-weight:800;color:#DCE2E7}
+.vg-tag{display:block;margin-top:22px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.8px}
+.vg-pcard{padding:0;overflow:hidden}
+.vg-pcard-img{height:230px;background:#DCE3E8;overflow:hidden}
+.vg-pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.vg-pcard:hover .vg-pcard-img img{transform:scale(1.05)}
+.vg-pcard-body{position:relative;padding:28px 28px 30px}
+.vg-pcard-body .vg-num{top:22px;right:24px}
+.vg-pcard-body h3{padding-right:44px}
+.vg-bar{display:flex;align-items:center;justify-content:space-between;gap:28px;margin-top:60px;padding:34px 38px;border-radius:10px}
+.vg-bar h3{font-size:24px;line-height:1.35;margin:0 0 8px}
+.vg-bar p{margin:0;font-size:14px;line-height:1.7}
+.vg-note{max-width:750px;margin:30px auto 0;text-align:center;color:#7B8893;font-size:12px;line-height:1.8}
+.vg-dark .vg-note{color:#AAB8C3}
+
+/* Header */
+.vg-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);box-shadow:0 2px 15px rgba(0,0,0,.06)}
+.vg-nav{width:min(1150px,calc(100% - 40px));margin:auto;min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.vg-logo img{height:52px;width:auto}
+.vg-links{display:flex;align-items:center;gap:27px;font-size:14px;font-weight:600;color:#455463}
+.vg-links a:hover{color:var(--orange-d)}
+.vg-menu{display:none;border:0;background:none;font-size:28px;color:var(--navy);cursor:pointer}
+.vg-nav .vg-btn{padding:13px 21px;border-radius:999px}
+
+/* Hero */
+.vg-hero{position:relative;min-height:620px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:url('volunteer-gigs.jpeg') center/cover;color:#fff;text-align:center}
+.vg-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(22,33,47,.92),rgba(22,33,47,.72),rgba(22,33,47,.55))}
+.vg-hero-content{position:relative;z-index:2;width:90%;max-width:900px;padding:90px 0}
+.vg-hero .vg-label{color:var(--orange);letter-spacing:3px}
+.vg-hero h1{font-size:clamp(38px,5.5vw,66px);line-height:1.15;font-weight:800;letter-spacing:-1.5px;margin:25px 0}
+.vg-hero h1 span{display:block;color:var(--orange)}
+.vg-hero-content p{max-width:700px;margin:0 auto 35px;font-size:17px;line-height:1.8;color:#EEF1F4}
+.vg-hero-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:16px}
+.vg-hero-note{margin-top:35px;color:#E0E6EB;font-size:13px}
+.vg-dot{display:inline-block;width:8px;height:8px;background:var(--orange);border-radius:50%;margin-right:8px}
+.vg-scroll{position:absolute;bottom:20px;left:0;width:100%;z-index:2;text-align:center;font-size:10px;letter-spacing:2px;color:#fff}
+.vg-scroll span{display:block;margin-top:5px;font-size:23px;color:var(--orange)}
+
+/* Problem */
+.vg-problem-intro{max-width:430px;color:#52616D;font-size:19px;line-height:1.7}
+.vg-problem-right p{color:#52616D;font-size:16px;line-height:1.9;margin:0 0 20px}
+.vg-highlight{display:flex;align-items:center;gap:18px;margin-top:30px;padding:20px 24px;background:#fff;border-left:4px solid var(--orange);border-radius:5px}
+.vg-highlight b{color:var(--orange);font:55px/1 Georgia,serif}
+.vg-problem-right .vg-highlight p{margin:0;color:var(--navy);font-size:17px;font-weight:700;line-height:1.6}
+
+/* Motivation */
+.vg-bottom{text-align:center;margin-top:55px}
+.vg-bottom h3{color:var(--orange);font-size:24px;margin:0 0 12px}
+.vg-bottom p{color:#D1D9E0;font-size:15px;line-height:1.8;margin:0}
+
+/* Solution */
+.vg-solution-copy p{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 17px}
+.vg-solution-copy .vg-lead{color:var(--navy);font-size:18px;font-weight:600;line-height:1.7}
+.vg-btn-row{display:flex;flex-wrap:wrap;align-items:center;gap:13px;margin-top:30px}
+.vg-check{display:flex;align-items:center;gap:10px;margin-top:25px;color:var(--muted);font-size:13px}
+.vg-check span{width:23px;height:23px;border-radius:50%;background:var(--soft);color:var(--orange-d);display:flex;align-items:center;justify-content:center;font-weight:700}
+.vg-photo{position:relative;height:510px}
+.vg-photo>img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.vg-img-error{display:none;width:100%;height:100%;padding:20px;align-items:center;justify-content:center;text-align:center;background:var(--light);color:var(--muted);border:1px dashed var(--slate);border-radius:10px}
+.vg-caption{position:absolute;left:-30px;bottom:25px;display:flex;align-items:center;gap:15px;padding:18px 23px;background:#fff;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.vg-caption .vg-icon{width:43px;height:43px;margin:0;flex-shrink:0;font-size:22px}
+.vg-caption strong{display:block;font-size:14px;margin-bottom:4px}
+.vg-caption small{color:var(--slate);font-size:12px}
+
+/* Opportunities and how it works */
+.vg-bar-dark{border:1px solid rgba(255,255,255,.2)}
+.vg-bar-dark p{color:#C9D3DB}
+.vg-bar-navy{background:var(--navy);color:#fff}
+.vg-bar-navy p{color:#C9D3DB;max-width:640px}
+.vg-bar-navy .vg-label{display:block;margin-bottom:10px}
+.vg-how .vg-card{padding:30px 24px}
+.vg-how .vg-card h3{font-size:19px}
+.vg-how .vg-card p{font-size:14px;line-height:1.85}
+
+/* Impact */
+.vg-gallery{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:18px}
+.vg-gallery img{width:100%;height:290px;object-fit:cover;border-radius:10px;background:#DCE3E8}
+.vg-impact-note{max-width:760px;margin:35px auto 0;text-align:center;color:var(--muted)}
+
+/* Support */
+.vg-support-box{display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:center;padding:52px;background:var(--navy);color:#fff;border-radius:10px}
+.vg-support-box .vg-h2{color:#fff}
+.vg-support-box p{margin:0;color:#C9D3DB}
+.vg-stack{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+
+/* Contact */
+.vg-contact p{color:var(--muted)}
+.vg-clinks{display:grid;gap:13px;margin-top:24px}
+.vg-clink{display:block;padding:15px 18px;border-radius:8px;background:var(--light);font-weight:700;transition:.2s}
+.vg-clink:hover{background:var(--soft)}
+.vg-clink span{color:var(--orange-d);margin-right:10px}
+.vg-warn{margin-top:26px;padding:18px 20px;background:#FFF7EB;border-left:4px solid var(--orange);border-radius:8px;color:#67533A;font-size:14px;line-height:1.7}
+
+/* Footer */
+.vg-footer{background:#101A26;color:rgba(255,255,255,.75);padding:35px 25px;font-size:14px}
+.vg-footer .vg-wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.vg-footer strong{color:#fff}
+
+@media(max-width:950px){.vg-g4{grid-template-columns:1fr 1fr}}
+@media(max-width:850px){
+  .vg-links{display:none;position:absolute;top:76px;left:0;right:0;flex-direction:column;align-items:stretch;gap:18px;padding:22px 25px 28px;background:#fff;box-shadow:0 12px 18px rgba(0,0,0,.08)}
+  .vg-links.open{display:flex}
+  .vg-menu{display:block}
+  .vg-nav>.vg-btn{display:none}
+  .vg-sec{padding:72px 20px}
+  .vg-split,.vg-support-box{grid-template-columns:1fr;gap:36px}
+  .vg-g3{grid-template-columns:1fr}
+  .vg-bar{flex-direction:column;align-items:stretch;text-align:center;padding:28px 22px}
+  .vg-bar .vg-btn{width:100%}
+  .vg-photo{height:380px}
+  .vg-caption{left:10px;bottom:15px;padding:13px}
+  .vg-gallery{grid-template-columns:1fr 1fr}
+  .vg-support-box{padding:34px 24px}
+}
+@media(max-width:600px){
+  .vg-g4,.vg-gallery{grid-template-columns:1fr}
+  .vg-gallery img{height:250px}
+  .vg-hero{min-height:590px}
+  .vg-hero-content{padding:70px 0}
+  .vg-hero-content p{font-size:15px}
+  .vg-hero-buttons,.vg-btn-row{flex-direction:column;align-items:stretch}
+  .vg-hero .vg-btn{align-self:center;width:100%;max-width:290px}
+  .vg-stack,.vg-stack .vg-btn{align-items:stretch;width:100%}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container nav">
-      <!-- EDIT: Replace the text brand below with your logo image if preferred. -->
-      <a href="#home" class="vg-logo">
-      <img src="Volunteer_Gigs_logo.png"
-           alt="Volunteer Gigs Logo"></a>
-      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" onclick="toggleMenu()">☰</button>
-      <nav class="nav-links" id="navLinks">
-        <a href="#about" onclick="closeMenu()">About</a>
-        <a href="#opportunities" onclick="closeMenu()">Opportunities</a>
-        <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
-        <a href="#impact" onclick="closeMenu()">Our Impact</a>
-        <a href="#contact" onclick="closeMenu()">Contact</a>
-      </nav>
-      <a class="btn btn-primary nav-cta" href="https://chat.whatsapp.com/HGIo4z45n8c8IebN5tEzfo" target="_blank" rel="noopener">Join the Community ↗</a>
-    </div>
-  </header>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="container">
-        <div class="hero-content">
-          <span class="eyebrow">VOLUNTEER • CONNECT • MAKE A DIFFERENCE</span>
-          <h1>Your Spare Time Can Change Someone's Life.</h1>
-          <p>You don't need to be a professional, make huge donations
-      or dedicate your entire day to making a difference.
-      Sometimes, showing up, lending a hand and spending time
-      with someone is enough.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="https://chat.whatsapp.com/HGIo4z45n8c8IebN5tEzfo" target="_blank" rel="noopener">Join Our Volunteer Community</a>
-            <a class="btn btn-outline" href="#opportunities">Explore Opportunities</a>
-          </div>
-
-    <div class="vg-hero-note">
-      <span class="vg-dot"></span>
-      Small acts. Meaningful experiences. Real impact.
-    </div>
-
+<header class="vg-header">
+  <div class="vg-nav">
+    <a href="#home" class="vg-logo"><img src="Volunteer_Gigs_logo.png" alt="Volunteer Gigs logo"></a>
+    <button class="vg-menu" aria-label="Open navigation" aria-expanded="false" onclick="toggleMenu()">☰</button>
+    <nav class="vg-links" id="navLinks">
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#opportunities" onclick="closeMenu()">Opportunities</a>
+      <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
+      <a href="#impact" onclick="closeMenu()">Our Impact</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
+    </nav>
+    <a class="vg-btn vg-primary" href="https://chat.whatsapp.com/HGIo4z45n8c8IebN5tEzfo" target="_blank" rel="noopener noreferrer">Join the Community ↗</a>
   </div>
+</header>
 
-  <div class="vg-scroll">
-    SCROLL TO DISCOVER
-    <span>↓</span>
-  </div>
-    </section>
+<main>
 
-    <section id="about">
-      <div class="container intro-grid">
-        <div class="intro-image">
-          <!-- EDIT: Replace with your preferred Volunteer Gigs / KSPCA image URL. -->
-          <img src="https://static.wixstatic.com/media/e3c2f0_2d206affd7e1407ca6c6ac95db4d6c09~mv2.jpeg" alt="Volunteers spending time with animals">
-        </div>
-        <div class="intro-copy">
-          <span class="eyebrow">A little time goes a long way</span>
-          <h2>There Are Many Ways to Make a Difference.</h2>
-          <p>Sometimes, all it takes is a willing heart and a few hours to make someone's day brighter. Volunteer Gigs helps people discover opportunities to support organisations doing important work.</p>
-          <p>Whether you enjoy spending time with children, supporting hospice communities or caring for animals, there may be a place where your time and kindness can help.</p>
-          <ul class="check-list">
-            <li>Discover volunteering opportunities</li>
-            <li>Connect with other willing volunteers</li>
-            <li>Offer practical help, companionship and kindness</li>
-          </ul>
-          <a class="btn btn-primary" href="#how-it-works">See How It Works</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="soft" id="opportunities">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">Find your cause</span>
-          <h2>Where Would You Like to Make a Difference?</h2>
-          <p>Explore different areas where volunteers may be able to offer their time and support. Specific visits depend on each organisation's needs and permission.</p>
-        </div>
-        <div class="cards">
-          <article class="card">
-            <div class="card-image"><img src="andrew_new_life_volunteering.JPG" alt="Volunteers supporting children" loading="lazy"></div>
-            <div class="card-body"><h3>Children's Homes</h3><p>Share your time through supervised play, reading, creative activities, companionship and practical support where requested by the home.</p></div>
-          </article>
-          <article class="card">
-            <div class="card-image"><img src="hospice_volunteering.JPG" alt="Volunteers offering companionship" loading="lazy"></div>
-            <div class="card-body"><h3>Hospices</h3><p>Offer companionship and practical non-clinical support. Any patient-facing activity must be approved and guided by the hospice team.</p></div>
-          </article>
-          <article class="card">
-            <div class="card-image"><img src="kspca_volunteering.JPG" alt="Animal shelter volunteering" loading="lazy"></div>
-            <div class="card-body"><h3>Animal Shelters</h3><p>Help with approved activities such as walking dogs, socialising cats, cleaning, feeding assistance and sharing animal welfare awareness.</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="how-it-works">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">Getting involved is simple</span>
-          <h2>Four Steps to Get Started.</h2>
-          <p>You don't need to have everything figured out. Start by joining the community and finding an opportunity that suits you.</p>
-        </div>
-        <div class="how-grid">
-          <div class="step"><div class="step-number">01</div><h3>Join Us</h3><p>Join our WhatsApp or Telegram community to hear about volunteering opportunities.</p></div>
-          <div class="step"><div class="step-number">02</div><h3>Find a Cause</h3><p>Explore opportunities and choose an organisation or activity that interests you.</p></div>
-          <div class="step"><div class="step-number">03</div><h3>Confirm Details</h3><p>Check the organisation's requirements, availability, permission and visit arrangements before going.</p></div>
-          <div class="step"><div class="step-number">04</div><h3>Show Up & Help</h3><p>Bring a willing attitude, follow the organisation's guidance and make your time count.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="soft" id="impact">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">Real moments. Real impact.</span>
-          <h2>Every Helping Hand Matters.</h2>
-          <p>Volunteering isn't always about grand gestures. It can be a conversation, a helping hand, a shared laugh or simply showing up.</p>
-        </div>
-        <div class="gallery">
-          <!-- EDIT: Replace these placeholders with publicly accessible image URLs. -->
-          <img src="kspca_group_volunteering.JPG" alt="Volunteer moment at an animal shelter" loading="lazy">
-          <img src="new_life_group_volunteering.JPG" alt="Volunteer activity with children" loading="lazy">
-          <img src="volunteer_group_photo_kspca.JPG" alt="Volunteer companionship visit" loading="lazy">
-        </div>
-        <p class="impact-note">Have a volunteering moment or story to share? We'd love to celebrate the kindness happening in our community.</p>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="support-box">
-          <div><span class="eyebrow">More than volunteering</span><h2>Can't Volunteer Your Time? You Can Still Help.</h2><p>Some organisations may also welcome useful items or other forms of support. Check with the organisation first to confirm what is needed and how donations should be delivered.</p></div>
-          <div class="support-actions">
-            <a class="btn btn-primary" href="https://chat.whatsapp.com/HGIo4z45n8c8IebN5tEzfo" target="_blank" rel="noopener">Ask About Ways to Help</a>
-            <a class="btn btn-outline" href="#contact">Get in Touch</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container contact-grid">
-        <div>
-          <span class="eyebrow">Let's make kindness happen</span>
-          <h2>Ready to Give Your Time?</h2>
-          <p>Join the Volunteer Gigs community and connect with people who want to make a positive difference. Reach out if you have a question or would like to share an opportunity.</p>
-          <div class="note"><strong>A quick note:</strong> Volunteer Gigs is an independent volunteer community, not a registered charity or the official representative of any facility. All visits and activities must be arranged with and approved by the relevant organisation.</div>
-        </div>
-        <div>
-          <h3 style="color:var(--navy);margin-top:0">Connect with us</h3>
-          <div class="contact-links">
-            <a class="contact-link" href="https://chat.whatsapp.com/HGIo4z45n8c8IebN5tEzfo" target="_blank" rel="noopener"><span>●</span> Join our WhatsApp Group</a>
-            <a class="contact-link" href="https://t.me/+znxPvneemT1hOWU0" target="_blank" rel="noopener"><span>●</span> Join our Telegram Group</a>
-            <a class="contact-link" href="https://wa.me/254745214225" target="_blank" rel="noopener"><span>●</span> WhatsApp: 0745 214 225</a>
-            <a class="contact-link" href="tel:+254745214225"><span>●</span> Call: 0745 214 225</a>
-            <a class="contact-link" href="mailto:andrewomindi@gmail.com"><span>●</span> andrewomindi@gmail.com</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-row">
-      <div><strong>Volunteer Gigs</strong><br>Your spare time can change someone's life.</div>
-      <div>© <span id="year"></span> Volunteer Gigs. Made for people who care.</div>
+<!-- HERO -->
+<section class="vg-hero" id="home">
+  <div class="vg-overlay"></div>
+  <div class="vg-hero-content">
+    <span class="vg-label">VOLUNTEER • CONNECT • MAKE A DIFFERENCE</span>
+    <h1>Your Spare Time Can <span>Change Someone’s Life.</span></h1>
+    <p>You don’t need to be a professional, make huge donations or dedicate your entire day to making a difference. Sometimes, showing up, lending a hand and spending time with someone is enough.</p>
+    <div class="vg-hero-buttons">
+      <a href="https://chat.whatsapp.com/HGIo4z45n8c8IebN5tEzfo" target="_blank" rel="noopener noreferrer" class="vg-btn vg-primary">Join Our Community <span aria-hidden="true">→</span></a>
+      <a href="#opportunities" class="vg-btn vg-ghost">Explore Opportunities</a>
     </div>
-  </footer>
+    <div class="vg-hero-note"><span class="vg-dot"></span>Small acts. Meaningful experiences. Real impact.</div>
+  </div>
+  <a class="vg-scroll" href="#about" aria-label="Scroll to the next section">SCROLL TO DISCOVER<span aria-hidden="true">↓</span></a>
+</section>
 
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById('navLinks');
-      const button = document.querySelector('.menu-toggle');
-      const isOpen = nav.classList.toggle('open');
-      button.setAttribute('aria-expanded', String(isOpen));
-      button.textContent = isOpen ? '×' : '☰';
-    }
-    function closeMenu() {
-      document.getElementById('navLinks').classList.remove('open');
-      const button = document.querySelector('.menu-toggle');
-      button.setAttribute('aria-expanded', 'false');
-      button.textContent = '☰';
-    }
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+<!-- PROBLEM -->
+<section class="vg-sec vg-light" id="about">
+  <div class="vg-wrap vg-split">
+    <div>
+      <span class="vg-label">THE DESIRE TO MAKE A DIFFERENCE</span>
+      <h2 class="vg-h2">You Want to Give Back. <span>But Where Do You Start?</span></h2>
+      <div class="vg-line"></div>
+      <p class="vg-problem-intro">Sometimes, the hardest part of giving back is simply knowing where to begin.</p>
+    </div>
+    <div class="vg-problem-right">
+      <p>Many people want to support vulnerable children, visit people in need or care for rescued animals. They want to do something meaningful with their free time.</p>
+      <p>But finding organisations that need help, knowing what activities to participate in and organising a visit can be challenging.</p>
+      <p>And then life gets busy. Days turn into weeks, and the good intentions we had keep getting postponed.</p>
+      <div class="vg-highlight">
+        <b aria-hidden="true">“</b>
+        <p>What if finding an opportunity to help was easier than you thought?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOTIVATION -->
+<section class="vg-sec vg-dark">
+  <div class="vg-wrap">
+    <div class="vg-head">
+      <span class="vg-label">EVERY LITTLE THING COUNTS</span>
+      <h2 class="vg-h2">You Don’t Have to Wait <span>for the Perfect Time.</span></h2>
+      <p>You don’t need to have everything figured out before you start making a difference. Sometimes, all it takes is a little time, a willing heart and the decision to show up.</p>
+    </div>
+    <div class="vg-grid vg-g3">
+      <div class="vg-card"><div class="vg-icon" aria-hidden="true">♡</div><h3>Give Your Time</h3><p>Spend time with children, keep someone company or simply bring a little joy to someone’s day.</p></div>
+      <div class="vg-card"><div class="vg-icon" aria-hidden="true">✦</div><h3>Lend a Helping Hand</h3><p>Help with laundry, cleaning, feeding assistance and other everyday activities where an extra pair of hands is needed.</p></div>
+      <div class="vg-card"><div class="vg-icon" aria-hidden="true">♡</div><h3>Show Some Kindness</h3><p>Walk a rescued dog, spend time with shelter cats or help provide useful items to people who need them.</p></div>
+    </div>
+    <div class="vg-bottom">
+      <h3>A few hours can make someone’s day a little better.</h3>
+      <p>You may not change the whole world in one visit, but you can make a meaningful difference in someone’s world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="vg-sec" id="vg-solution">
+  <div class="vg-wrap vg-split">
+    <div class="vg-solution-copy">
+      <span class="vg-label">INTRODUCING VOLUNTEER GIGS</span>
+      <h2 class="vg-h2">That’s Where <span>We Come In.</span></h2>
+      <div class="vg-line"></div>
+      <p class="vg-lead">Finding an opportunity to give back shouldn’t be difficult. You just need the right people and a place to start.</p>
+      <p>Volunteer Gigs brings together people who want to make a difference and connects them with volunteering opportunities at children’s homes, hospices and animal shelters.</p>
+      <p>From spending time with children and supporting hospice caregivers to walking rescued dogs and helping with everyday tasks, there are different ways to contribute.</p>
+      <p>You don’t have to do it alone. Join a community of like-minded people, discover upcoming visits and be part of something meaningful.</p>
+      <div class="vg-btn-row">
+        <a href="https://chat.whatsapp.com/HGIo4z45n8c8IebN5tEzfo" target="_blank" rel="noopener noreferrer" class="vg-btn vg-primary">Join Our Community <span aria-hidden="true">→</span></a>
+        <a href="https://t.me/+znxPvneemT1hOWU0" target="_blank" rel="noopener noreferrer" class="vg-btn vg-ghost-dark">Join on Telegram</a>
+      </div>
+      <div class="vg-check"><span aria-hidden="true">✓</span>No previous volunteering experience required.</div>
+    </div>
+    <div class="vg-photo">
+      <img src="https://static.wixstatic.com/media/e3c2f0_2d206affd7e1407ca6c6ac95db4d6c09~mv2.jpeg" alt="Volunteers participating in a KSPCA community visit" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="vg-img-error">Image could not load. Please check the image URL.</div>
+      <div class="vg-caption">
+        <div class="vg-icon" aria-hidden="true">♡</div>
+        <div><strong>Every visit matters.</strong><small>Every helping hand counts.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITIES -->
+<section class="vg-sec vg-dark" id="opportunities">
+  <div class="vg-wrap">
+    <div class="vg-head">
+      <span class="vg-label">FIND YOUR WAY TO GIVE BACK</span>
+      <h2 class="vg-h2">There Are Many Ways <span>To Make A Difference.</span></h2>
+      <p>Whether you love working with children, supporting people who need care, or spending time with animals, there’s a place where your time and kindness can matter.</p>
+    </div>
+    <div class="vg-grid vg-g3">
+      <article class="vg-card vg-pcard">
+        <div class="vg-pcard-img"><img src="andrew_new_life_volunteering.JPG" alt="Volunteers supporting children" loading="lazy"></div>
+        <div class="vg-pcard-body"><span class="vg-num" aria-hidden="true">01</span><h3>Children’s Homes</h3><p>Give children something priceless: your time and attention. Join activities, play games, read stories, help with everyday tasks and bring smiles to their day.</p><span class="vg-tag">SHARE YOUR TIME</span></div>
+      </article>
+      <article class="vg-card vg-pcard">
+        <div class="vg-pcard-img"><img src="hospice_volunteering.JPG" alt="Volunteers offering companionship" loading="lazy"></div>
+        <div class="vg-pcard-body"><span class="vg-num" aria-hidden="true">02</span><h3>Hospices</h3><p>Show compassion to people facing difficult moments. Offer companionship, help with approved everyday activities and support caregivers where assistance is welcome.</p><span class="vg-tag">SHOW COMPASSION</span></div>
+      </article>
+      <article class="vg-card vg-pcard">
+        <div class="vg-pcard-img"><img src="kspca_volunteering.JPG" alt="Animal shelter volunteering" loading="lazy"></div>
+        <div class="vg-pcard-body"><span class="vg-num" aria-hidden="true">03</span><h3>Animal Shelters</h3><p>Help rescued animals feel loved and cared for. Spend time with dogs and cats, assist with cleaning, support feeding activities and help with socialisation.</p><span class="vg-tag">CARE FOR ANIMALS</span></div>
+      </article>
+    </div>
+    <div class="vg-bar vg-bar-dark">
+      <div><h3>Not sure where to begin?</h3><p>Join our community and discover upcoming volunteering visits.</p></div>
+      <a href="https://chat.whatsapp.com/HGIo4z45n8c8IebN5tEzfo" target="_blank" rel="noopener noreferrer" class="vg-btn vg-primary">Find Your Opportunity <span aria-hidden="true">→</span></a>
+    </div>
+    <p class="vg-note">All volunteering activities are arranged subject to the participating organisation’s approval and guidelines. Care-related activities remain under the supervision of the appropriate staff.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="vg-sec vg-light vg-how" id="how-it-works">
+  <div class="vg-wrap">
+    <div class="vg-head">
+      <span class="vg-label">GETTING STARTED IS EASY</span>
+      <h2 class="vg-h2">Four Simple Steps. <span>One Meaningful Difference.</span></h2>
+      <p>You don’t need special skills or years of experience. All you need is the willingness to show up and make someone’s day a little better.</p>
+    </div>
+    <div class="vg-grid vg-g4">
+      <div class="vg-card"><span class="vg-num" aria-hidden="true">01</span><div class="vg-icon" aria-hidden="true">♧</div><h3>Join the Community</h3><p>Become part of our volunteer community through WhatsApp or Telegram. Connect with people who share your desire to give back.</p><span class="vg-tag">START HERE</span></div>
+      <div class="vg-card"><span class="vg-num" aria-hidden="true">02</span><div class="vg-icon" aria-hidden="true">⌕</div><h3>Discover Opportunities</h3><p>Find out about upcoming visits and volunteering activities at children’s homes, hospices and animal shelters.</p><span class="vg-tag">EXPLORE</span></div>
+      <div class="vg-card"><span class="vg-num" aria-hidden="true">03</span><div class="vg-icon" aria-hidden="true">✓</div><h3>Confirm Your Visit</h3><p>Choose an activity that works for you, confirm your participation and understand the arrangements and guidelines for the visit.</p><span class="vg-tag">MAKE A PLAN</span></div>
+      <div class="vg-card"><span class="vg-num" aria-hidden="true">04</span><div class="vg-icon" aria-hidden="true">♡</div><h3>Show Up &amp; Make a Difference</h3><p>Come along, lend a helping hand and share your time. Small acts of kindness can create meaningful moments.</p><span class="vg-tag">MAKE IT COUNT</span></div>
+    </div>
+    <div class="vg-bar vg-bar-navy">
+      <div><span class="vg-label">YOUR FIRST STEP STARTS HERE</span><h3>Ready to be part of something meaningful?</h3><p>Join the community today. Your next opportunity to make a difference could be closer than you think.</p></div>
+      <a href="https://chat.whatsapp.com/HGIo4z45n8c8IebN5tEzfo" target="_blank" rel="noopener noreferrer" class="vg-btn vg-primary">Join Volunteer Gigs <span aria-hidden="true">→</span></a>
+    </div>
+    <p class="vg-note">Volunteer Gigs is an independent volunteer community. Activities and visits are subject to the approval, availability and guidelines of participating organisations.</p>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="vg-sec" id="impact">
+  <div class="vg-wrap">
+    <div class="vg-head">
+      <span class="vg-label">REAL MOMENTS. REAL IMPACT.</span>
+      <h2 class="vg-h2">Every Helping Hand <span>Matters.</span></h2>
+      <p>Volunteering isn’t always about grand gestures. It can be a conversation, a helping hand, a shared laugh or simply showing up.</p>
+    </div>
+    <div class="vg-gallery">
+      <img src="kspca_group_volunteering.JPG" alt="Volunteer moment at an animal shelter" loading="lazy">
+      <img src="new_life_group_volunteering.JPG" alt="Volunteer activity with children" loading="lazy">
+      <img src="volunteer_group_photo_kspca.JPG" alt="Volunteer group photo at an animal shelter" loading="lazy">
+    </div>
+    <p class="vg-impact-note">Have a volunteering moment or story to share? We’d love to celebrate the kindness happening in our community.</p>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="vg-sec vg-light">
+  <div class="vg-wrap">
+    <div class="vg-support-box">
+      <div>
+        <span class="vg-label" style="color:var(--orange)">MORE THAN VOLUNTEERING</span>
+        <h2 class="vg-h2">Can’t Volunteer Your Time? You Can Still Help.</h2>
+        <p>Some organisations may also welcome useful items or other forms of support. Check with the organisation first to confirm what is needed and how donations should be delivered.</p>
+      </div>
+      <div class="vg-stack">
+        <a class="vg-btn vg-primary" href="https://chat.whatsapp.com/HGIo4z45n8c8IebN5tEzfo" target="_blank" rel="noopener noreferrer">Ask About Ways to Help</a>
+        <a class="vg-btn vg-ghost" href="#contact">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="vg-sec vg-contact" id="contact">
+  <div class="vg-wrap vg-split" style="align-items:start">
+    <div>
+      <span class="vg-label">LET’S MAKE KINDNESS HAPPEN</span>
+      <h2 class="vg-h2">Ready to Give Your Time?</h2>
+      <p>Join the Volunteer Gigs community and connect with people who want to make a positive difference. Reach out if you have a question or would like to share an opportunity.</p>
+      <div class="vg-warn"><strong>A quick note:</strong> Volunteer Gigs is an independent volunteer community, not a registered charity or the official representative of any facility. All visits and activities must be arranged with and approved by the relevant organisation.</div>
+    </div>
+    <div>
+      <h3 style="margin:0">Connect with us</h3>
+      <div class="vg-clinks">
+        <a class="vg-clink" href="https://chat.whatsapp.com/HGIo4z45n8c8IebN5tEzfo" target="_blank" rel="noopener noreferrer"><span>●</span>Join our WhatsApp Group</a>
+        <a class="vg-clink" href="https://t.me/+znxPvneemT1hOWU0" target="_blank" rel="noopener noreferrer"><span>●</span>Join our Telegram Group</a>
+        <a class="vg-clink" href="https://wa.me/254745214225" target="_blank" rel="noopener noreferrer"><span>●</span>WhatsApp: 0745 214 225</a>
+        <a class="vg-clink" href="tel:+254745214225"><span>●</span>Call: 0745 214 225</a>
+        <a class="vg-clink" href="mailto:andrewomindi@gmail.com"><span>●</span>andrewomindi@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="vg-footer">
+  <div class="vg-wrap">
+    <div><strong>Volunteer Gigs</strong><br>Your spare time can change someone’s life.</div>
+    <div>© <span id="year"></span> Volunteer Gigs. Made for people who care.</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  var nav=document.getElementById('navLinks'),btn=document.querySelector('.vg-menu');
+  var open=nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded',String(open));
+  btn.textContent=open?'×':'☰';
+}
+function closeMenu(){
+  var btn=document.querySelector('.vg-menu');
+  document.getElementById('navLinks').classList.remove('open');
+  btn.setAttribute('aria-expanded','false');
+  btn.textContent='☰';
+}
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
 </body>
 </html>
